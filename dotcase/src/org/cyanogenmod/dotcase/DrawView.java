@@ -20,6 +20,8 @@
 
 package org.cyanogenmod.dotcase;
 
+import org.cyanogenmod.dotcase.DotcaseConstants.Notification;
+
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -66,8 +68,7 @@ public class DrawView extends View {
                 Dotcase.checkNotifications();
             }
 
-            if (Dotcase.gmail || Dotcase.hangouts || Dotcase.mms || Dotcase.missed_call
-                              || Dotcase.twitter || Dotcase.voicemail) {
+            if (!Dotcase.notifications.isEmpty()) {
                 if (heartbeat < 3) {
                     drawNotifications(canvas);
                 } else {
@@ -147,14 +148,14 @@ public class DrawView extends View {
             }
         }
 
-        dotcaseDrawSprite(DotcaseConstants.getSmallSprite(
+        dotcaseDrawSprite(DotcaseConstants.getSmallNumSprite(
                 time.timeString.charAt(0)), 0, 0, canvas);
-        dotcaseDrawSprite(DotcaseConstants.getSmallSprite(
+        dotcaseDrawSprite(DotcaseConstants.getSmallNumSprite(
                 time.timeString.charAt(1)), 4, 0, canvas);
         dotcaseDrawSprite(DotcaseConstants.smallTimeColon, 8, 1, canvas);
-        dotcaseDrawSprite(DotcaseConstants.getSmallSprite(
+        dotcaseDrawSprite(DotcaseConstants.getSmallNumSprite(
                 time.timeString.charAt(2)), 11, 0, canvas);
-        dotcaseDrawSprite(DotcaseConstants.getSmallSprite(
+        dotcaseDrawSprite(DotcaseConstants.getSmallNumSprite(
                 time.timeString.charAt(3)), 15, 0, canvas);
         dotcaseDrawSprite(mClockSprite, 7, 7, canvas);
 
@@ -186,39 +187,13 @@ public class DrawView extends View {
         int count = 0;
         int x = 1;
         int y = 30;
-        if (Dotcase.missed_call) {
-            dotcaseDrawSprite(DotcaseConstants.missedCallSprite,
-                    x + ((count % 3) * 9), y + ((count / 3) * 9), canvas);
-            count++;
-        }
 
-        if (Dotcase.voicemail) {
-            dotcaseDrawSprite(DotcaseConstants.voicemailSprite,
-                    x + ((count % 3) * 9), y + ((count / 3) * 9), canvas);
-            count++;
-        }
-
-        if (Dotcase.gmail) {
-            dotcaseDrawSprite(DotcaseConstants.gmailSprite,
-                    x + ((count % 3) * 9), y + ((count / 3) * 9), canvas);
-            count++;
-        }
-
-        if (Dotcase.hangouts) {
-            dotcaseDrawSprite(DotcaseConstants.hangoutsSprite,
-                    x + ((count % 3) * 9), y + ((count / 3) * 9), canvas);
-            count++;
-        }
-
-        if (Dotcase.mms) {
-            dotcaseDrawSprite(DotcaseConstants.mmsSprite,
-                    x + ((count % 3) * 9), y + ((count / 3) * 9), canvas);
-            count++;
-        }
-
-        if (Dotcase.twitter) {
-            dotcaseDrawSprite(DotcaseConstants.twitterSprite,
-                    x + ((count % 3) * 9), y + ((count / 3) * 9), canvas);
+        for (Notification notification : Dotcase.notifications) {
+            int[][] sprite = DotcaseConstants.getNotificationSprite(notification);
+            if (sprite != null) {
+                dotcaseDrawSprite(sprite, x + ((count % 3) * 9), y + ((count / 3) * 9), canvas);
+                count++;
+            }
         }
     }
 
@@ -328,13 +303,13 @@ public class DrawView extends View {
         }
 
         dotcaseDrawSprite(DotcaseConstants.timeColon, starter + 10, 5 + 4, canvas);
-        dotcaseDrawSprite(DotcaseConstants.getSprite(time.timeString.charAt(0)),
+        dotcaseDrawSprite(DotcaseConstants.getNumSprite(time.timeString.charAt(0)),
                 starter, 5, canvas);
-        dotcaseDrawSprite(DotcaseConstants.getSprite(time.timeString.charAt(1)),
+        dotcaseDrawSprite(DotcaseConstants.getNumSprite(time.timeString.charAt(1)),
                 starter + 5, 5, canvas);
-        dotcaseDrawSprite(DotcaseConstants.getSprite(time.timeString.charAt(2)),
+        dotcaseDrawSprite(DotcaseConstants.getNumSprite(time.timeString.charAt(2)),
                 starter + 12, 5, canvas);
-        dotcaseDrawSprite(DotcaseConstants.getSprite(time.timeString.charAt(3)),
+        dotcaseDrawSprite(DotcaseConstants.getNumSprite(time.timeString.charAt(3)),
                 starter + 17, 5, canvas);
     }
 
@@ -378,7 +353,7 @@ public class DrawView extends View {
         int x = 0, y = 5;
         if (Dotcase.ringing) {
             for (int i = 3; i < Dotcase.phoneNumber.length(); i++) {
-                sprite = DotcaseConstants.getSmallSprite(Dotcase.phoneNumber.charAt(i));
+                sprite = DotcaseConstants.getSmallNumSprite(Dotcase.phoneNumber.charAt(i));
                 dotcaseDrawSprite(sprite, x + (i - 3) * 4, y, canvas);
             }
         }
