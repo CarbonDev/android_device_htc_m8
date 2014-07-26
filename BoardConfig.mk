@@ -187,3 +187,6 @@ TARGET_RELEASETOOLS_EXTENSIONS := device/htc/m8/releasetools
 
 # Hardware
 BOARD_HARDWARE_CLASS := device/htc/m8/cmhw
+
+# External apps on SD
+TARGET_EXTERNAL_APPS = sdcard1
