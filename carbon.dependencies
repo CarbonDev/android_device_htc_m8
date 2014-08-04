@@ -31,8 +31,8 @@
   },
   {
     "remote": "gh",
-    "repository": "TheMuppets/proprietary_vendor_htc",
+    "repository": "CarbonDev/proprietary_vendor_htc",
     "target_path": "vendor/htc",
-    "revision": "cm-11.0"
+    "revision": "kk"
    }
 ]
