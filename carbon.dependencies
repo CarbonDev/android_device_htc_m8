@@ -1,11 +1,9 @@
 [
   {
-    "repository": "CarbonDev/android_kernel_htc_msm8974",
-    "target_path": "kernel/htc/msm8974"
-  },
-  {
-    "repository": "CarbonDev/proprietary_vendor_htc",
-    "target_path": "vendor/htc"
+    "remote": "cm",
+    "repository": "CyanogenMod/android_kernel_htc_msm8974",
+    "target_path": "kernel/htc/msm8974",
+    "revision": "cm-11.0"
   },
   {
     "remote": "cm",
@@ -29,6 +27,12 @@
     "remote": "cm",
     "repository": "CyanogenMod/android_hardware_qcom_fm",
     "target_path": "hardware/qcom/fm",
+    "revision": "cm-11.0"
+  },
+  {
+    "remote": "gh",
+    "repository": "TheMuppets/proprietary_vendor_htc",
+    "target_path": "vendor/htc",
     "revision": "cm-11.0"
   }
 ]
